@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HCIProgramming — Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#0a0a0f;--surface:#13131a;--card:#1a1a24;--border:#2a2a3d;--accent:#7c6af7;--accent2:#f76a8c;--accent3:#6af7c8;--accent4:#f7c86a;--text:#e8e8f0;--muted:#6b6b88;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;}
+    .nav-logo{font-size:1.1rem;font-weight:800;letter-spacing:-0.5px;color:var(--accent);text-decoration:none;}
+    .nav-logo span{color:var(--accent2);}
+    main{padding-top:80px;min-height:100vh;animation:fadeIn .3s ease;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .hero{padding:4rem 2rem 3rem;max-width:900px;margin:0 auto;text-align:center;}
+    .hero-name{font-family:'Space Mono',monospace;font-size:0.85rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.2rem;}
+    .hero h1{font-size:clamp(2rem,6vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-2px;margin-bottom:2.5rem;}
+    .hero h1 em{font-style:normal;color:var(--accent);}
+    .home-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:900px;margin:0 auto;padding:0 2rem 4rem;}
+    .home-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;color:inherit;}
+    .home-card::before{content:'';position:absolute;inset:0;background:var(--card-glow,rgba(124,106,247,0.05));opacity:0;transition:opacity .25s;}
+    .home-card:hover{border-color:var(--card-color,var(--accent));transform:translateY(-3px);}
+    .home-card:hover::before{opacity:1;}
+    .home-card[data-c="io"]{--card-color:var(--accent);--card-glow:rgba(124,106,247,0.08);}
+    .home-card[data-c="var"]{--card-color:var(--accent2);--card-glow:rgba(247,106,140,0.08);}
+    .home-card[data-c="cond"]{--card-color:var(--accent3);--card-glow:rgba(106,247,200,0.08);}
+    .home-card[data-c="loop"]{--card-color:var(--accent4);--card-glow:rgba(247,200,106,0.08);}
+    .card-icon{font-size:2rem;margin-bottom:.75rem;}
+    .card-title{font-size:1rem;font-weight:700;margin-bottom:.3rem;color:var(--card-color,var(--text));}
+    .card-desc{font-size:0.8rem;color:var(--muted);line-height:1.5;flex:1;}
+    .card-count{display:inline-block;margin-top:.75rem;font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);background:var(--surface);padding:2px 8px;border-radius:10px;}
+    footer{text-align:center;padding:2rem;font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);border-top:1px solid var(--border);}
+    @media(max-width:700px){.home-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:420px){.home-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="241697CAMATAIndex.html">HCI<span>Programming</span></a>
+</nav>
+<main>
+  <div class="hero">
+    <div class="hero-name">MARK NIEL CAMATA</div>
+    <h1>Human Computer Interaction <em>Programming</em></h1>
+  </div>
+  <div class="home-grid">
+    <a class="home-card" data-c="io" href="241697CAMATABasicIO.html">
+      <div class="card-icon">📥</div>
+      <div class="card-title">Basic I/O</div>
+      <div class="card-desc">Print output and read user input using Scanner and System.out.</div>
+      <div class="card-count">5 examples</div>
+    </a>
+    <a class="home-card" data-c="var" href="241697CAMATAVariables.html">
+      <div class="card-icon">📦</div>
+      <div class="card-title">Variables</div>
+      <div class="card-desc">Declare and use different data types: int, double, String, boolean, char.</div>
+      <div class="card-count">5 examples</div>
+    </a>
+    <a class="home-card" data-c="cond" href="241697CAMATAConditionals.html">
+      <div class="card-icon">🔀</div>
+      <div class="card-title">Conditionals</div>
+      <div class="card-desc">Control flow with if/else, else-if chains, ternary, and switch statements.</div>
+      <div class="card-count">5 examples</div>
+    </a>
+    <a class="home-card" data-c="loop" href="241697CAMATALoops.html">
+      <div class="card-icon">🔁</div>
+      <div class="card-title">Loops</div>
+      <div class="card-desc">Repeat code with for, while, do-while, for-each, and nested loops.</div>
+      <div class="card-count">5 examples</div>
+    </a>
+  </div>
+  <footer>THANK YOU</footer>
+</main>
+</body>
+</html>

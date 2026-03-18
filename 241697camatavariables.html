@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HCIProgramming — Variables</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#0a0a0f;--surface:#13131a;--card:#1a1a24;--border:#2a2a3d;--accent:#7c6af7;--accent2:#f76a8c;--accent3:#6af7c8;--text:#e8e8f0;--muted:#6b6b88;--code-bg:#0d0d14;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;}
+    .nav-logo{font-size:1.1rem;font-weight:800;letter-spacing:-0.5px;color:var(--accent);text-decoration:none;}
+    .nav-logo span{color:var(--accent2);}
+    .nav-links{display:flex;gap:4px;}
+    .nav-links a{color:var(--muted);font-family:'Space Mono',monospace;font-size:0.75rem;padding:6px 14px;border-radius:6px;transition:all .2s;text-decoration:none;display:inline-block;}
+    .nav-links a:hover{color:var(--text);background:var(--surface);}
+    .nav-links a.active{color:var(--accent2);background:rgba(247,106,140,0.15);}
+    main{padding-top:80px;min-height:100vh;animation:fadeIn .3s ease;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .topic-header{padding:3rem 2rem 2rem;max-width:860px;margin:0 auto;border-bottom:1px solid var(--border);}
+    .topic-header h2{font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-1px;}
+    .topic-header p{color:var(--muted);margin-top:.5rem;font-size:0.95rem;}
+    .examples-list{max-width:860px;margin:0 auto;padding:2rem;display:flex;flex-direction:column;gap:1.5rem;}
+    .example-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+    .example-header{padding:1rem 1.25rem 0.75rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+    .example-num{font-family:'Space Mono',monospace;font-size:0.65rem;padding:2px 8px;border-radius:10px;color:var(--accent2);border:1px solid rgba(247,106,140,0.3);background:rgba(247,106,140,0.1);}
+    .example-title{font-size:0.95rem;font-weight:700;}
+    .example-desc{padding:.75rem 1.25rem;color:var(--muted);font-size:0.85rem;line-height:1.6;}
+    .interact-zone{margin:0 1.25rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+    .interact-zone label{font-size:0.8rem;color:var(--muted);display:block;margin-bottom:.4rem;font-family:'Space Mono',monospace;}
+    .interact-zone input,.interact-zone select{width:100%;background:var(--code-bg);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:0.82rem;padding:8px 10px;border-radius:8px;margin-bottom:.75rem;outline:none;transition:border-color .2s;}
+    .interact-zone input:focus,.interact-zone select:focus{border-color:var(--accent2);}
+    .run-btn{background:var(--accent2);color:#fff;border:none;font-family:'Space Mono',monospace;font-size:0.75rem;padding:8px 18px;border-radius:8px;cursor:pointer;transition:opacity .2s;letter-spacing:1px;}
+    .run-btn:hover{opacity:0.85;}
+    .output-box{margin-top:.75rem;background:var(--code-bg);border:1px solid rgba(247,106,140,0.2);border-radius:8px;padding:.75rem 1rem;}
+    .out-label{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--accent2);letter-spacing:1px;margin-bottom:.3rem;}
+    .out-text{font-family:'Space Mono',monospace;font-size:0.82rem;color:#fbb6c8;white-space:pre-wrap;min-height:1.4em;}
+    footer{text-align:center;padding:2rem;font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);border-top:1px solid var(--border);}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="241697CAMATAIndex.html">HCI<span>Programming</span></a>
+  <div class="nav-links">
+    <a href="241697CAMATAIndex.html">Home</a>
+    <a href="241697CAMATABasicIO.html">Basic I/O</a>
+    <a href="241697CAMATAVariables.html" class="active">Variables</a>
+    <a href="241697CAMATAConditionals.html">Conditionals</a>
+    <a href="241697CAMATALoops.html">Loops</a>
+  </div>
+</nav>
+<main>
+  <div class="topic-header">
+    <h2>Variables</h2>
+    <p>Store and use different types of data. Enter values below to see each variable type in action!</p>
+  </div>
+  <div class="examples-list">
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">01</div><div class="example-title">int — Whole Numbers</div></div>
+      <div class="example-desc">Enter two whole numbers and it will add them together to show the result.</div>
+      <div class="interact-zone">
+        <label>First number:</label>
+        <input type="number" id="v1-a" placeholder="e.g. 5" value="5"/>
+        <label>Second number:</label>
+        <input type="number" id="v1-b" placeholder="e.g. 3" value="3"/>
+        <button class="run-btn" onclick="runV1()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="v1-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">02</div><div class="example-title">double — Decimal Numbers</div></div>
+      <div class="example-desc">Enter a price and it will compute the total with 12% tax applied.</div>
+      <div class="interact-zone">
+        <label>Price:</label>
+        <input type="number" id="v2-price" placeholder="e.g. 49.99" step="0.01" value="49.99"/>
+        <button class="run-btn" onclick="runV2()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="v2-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">03</div><div class="example-title">String — Text</div></div>
+      <div class="example-desc">Enter a first name and last name and it will combine them into a full name.</div>
+      <div class="interact-zone">
+        <label>First Name:</label>
+        <input type="text" id="v3-first" placeholder="e.g. Juan" value="Juan"/>
+        <label>Last Name:</label>
+        <input type="text" id="v3-last" placeholder="e.g. dela Cruz" value="dela Cruz"/>
+        <button class="run-btn" onclick="runV3()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="v3-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">04</div><div class="example-title">boolean — True or False</div></div>
+      <div class="example-desc">Select true or false and it will display the boolean value as output.</div>
+      <div class="interact-zone">
+        <label>Is a student?</label>
+        <select id="v4-student">
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </select>
+        <button class="run-btn" onclick="runV4()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="v4-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">05</div><div class="example-title">char — Single Character</div></div>
+      <div class="example-desc">Type a single letter for each field and it will display them as individual character outputs.</div>
+      <div class="interact-zone">
+        <label>Initial (1 character only):</label>
+        <input type="text" id="v5-initial" placeholder="e.g. A" maxlength="1" value="A"/>
+        <label>Grade (1 character only):</label>
+        <input type="text" id="v5-grade" placeholder="e.g. B" maxlength="1" value="B"/>
+        <button class="run-btn" onclick="runV5()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="v5-out">...</div></div>
+      </div>
+    </div>
+  </div>
+  <footer>THANK YOU</footer>
+</main>
+<script>
+  function runV1(){const a=parseInt(document.getElementById('v1-a').value);const b=parseInt(document.getElementById('v1-b').value);if(isNaN(a)||isNaN(b)){document.getElementById('v1-out').textContent='⚠ Please enter both values.';return;}document.getElementById('v1-out').textContent=a+' + '+b+' = '+(a+b);}
+  function runV2(){const p=parseFloat(document.getElementById('v2-price').value);if(isNaN(p)){document.getElementById('v2-out').textContent='⚠ Please enter a price.';return;}document.getElementById('v2-out').textContent='Total price: '+(p+p*0.12).toFixed(2);}
+  function runV3(){const f=document.getElementById('v3-first').value.trim();const l=document.getElementById('v3-last').value.trim();if(!f||!l){document.getElementById('v3-out').textContent='⚠ Please enter both names.';return;}document.getElementById('v3-out').textContent='Full name: '+f+' '+l;}
+  function runV4(){document.getElementById('v4-out').textContent='Is a student: '+document.getElementById('v4-student').value;}
+  function runV5(){const i=document.getElementById('v5-initial').value;const g=document.getElementById('v5-grade').value;if(!i||!g){document.getElementById('v5-out').textContent='⚠ Please enter both characters.';return;}document.getElementById('v5-out').textContent='Initial: '+i[0]+'\nGrade: '+g[0];}
+</script>
+</body>
+</html>

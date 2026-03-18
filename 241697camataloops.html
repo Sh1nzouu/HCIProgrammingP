@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HCIProgramming — Loops</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#0a0a0f;--surface:#13131a;--card:#1a1a24;--border:#2a2a3d;--accent:#7c6af7;--accent2:#f76a8c;--accent3:#6af7c8;--accent4:#f7c86a;--text:#e8e8f0;--muted:#6b6b88;--code-bg:#0d0d14;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;}
+    .nav-logo{font-size:1.1rem;font-weight:800;letter-spacing:-0.5px;color:var(--accent);text-decoration:none;}
+    .nav-logo span{color:var(--accent2);}
+    .nav-links{display:flex;gap:4px;}
+    .nav-links a{color:var(--muted);font-family:'Space Mono',monospace;font-size:0.75rem;padding:6px 14px;border-radius:6px;transition:all .2s;text-decoration:none;display:inline-block;}
+    .nav-links a:hover{color:var(--text);background:var(--surface);}
+    .nav-links a.active{color:var(--accent4);background:rgba(247,200,106,0.12);}
+    main{padding-top:80px;min-height:100vh;animation:fadeIn .3s ease;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .topic-header{padding:3rem 2rem 2rem;max-width:860px;margin:0 auto;border-bottom:1px solid var(--border);}
+    .topic-header h2{font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-1px;}
+    .topic-header p{color:var(--muted);margin-top:.5rem;font-size:0.95rem;}
+    .examples-list{max-width:860px;margin:0 auto;padding:2rem;display:flex;flex-direction:column;gap:1.5rem;}
+    .example-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+    .example-header{padding:1rem 1.25rem 0.75rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+    .example-num{font-family:'Space Mono',monospace;font-size:0.65rem;padding:2px 8px;border-radius:10px;color:var(--accent4);border:1px solid rgba(247,200,106,0.3);background:rgba(247,200,106,0.08);}
+    .example-title{font-size:0.95rem;font-weight:700;}
+    .example-desc{padding:.75rem 1.25rem;color:var(--muted);font-size:0.85rem;line-height:1.6;}
+    .interact-zone{margin:0 1.25rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+    .interact-zone label{font-size:0.8rem;color:var(--muted);display:block;margin-bottom:.4rem;font-family:'Space Mono',monospace;}
+    .interact-zone input{width:100%;background:var(--code-bg);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:0.82rem;padding:8px 10px;border-radius:8px;margin-bottom:.75rem;outline:none;transition:border-color .2s;}
+    .interact-zone input:focus{border-color:var(--accent4);}
+    .run-btn{background:var(--accent4);color:#0a0a0f;border:none;font-family:'Space Mono',monospace;font-size:0.75rem;padding:8px 18px;border-radius:8px;cursor:pointer;transition:opacity .2s;letter-spacing:1px;font-weight:700;}
+    .run-btn:hover{opacity:0.85;}
+    .output-box{margin-top:.75rem;background:var(--code-bg);border:1px solid rgba(247,200,106,0.2);border-radius:8px;padding:.75rem 1rem;}
+    .out-label{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--accent4);letter-spacing:1px;margin-bottom:.3rem;}
+    .out-text{font-family:'Space Mono',monospace;font-size:0.82rem;color:#fde9a2;white-space:pre-wrap;min-height:1.4em;}
+    footer{text-align:center;padding:2rem;font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);border-top:1px solid var(--border);}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="241697CAMATAIndex.html">HCI<span>Programming</span></a>
+  <div class="nav-links">
+    <a href="241697CAMATAIndex.html">Home</a>
+    <a href="241697CAMATABasicIO.html">Basic I/O</a>
+    <a href="241697CAMATAVariables.html">Variables</a>
+    <a href="241697CAMATAConditionals.html">Conditionals</a>
+    <a href="241697CAMATALoops.html" class="active">Loops</a>
+  </div>
+</nav>
+<main>
+  <div class="topic-header">
+    <h2>Loops</h2>
+    <p>Repeat actions automatically. Enter a value and watch it loop!</p>
+  </div>
+  <div class="examples-list">
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">01</div><div class="example-title">for Loop</div></div>
+      <div class="example-desc">Enter a number and it will count from 1 up to that number.</div>
+      <div class="interact-zone">
+        <label>Count up to (max 20):</label>
+        <input type="number" id="l1-max" placeholder="e.g. 5" min="1" max="20" value="5"/>
+        <button class="run-btn" onclick="runL1()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="l1-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">02</div><div class="example-title">while Loop</div></div>
+      <div class="example-desc">Enter a starting number and it will keep counting up until it reaches 10.</div>
+      <div class="interact-zone">
+        <label>Start counting from:</label>
+        <input type="number" id="l2-start" placeholder="e.g. 1" min="1" max="10" value="1"/>
+        <button class="run-btn" onclick="runL2()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="l2-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">03</div><div class="example-title">do-while Loop</div></div>
+      <div class="example-desc">Enter a starting number and it will run at least once, then keep going until it exceeds 5.</div>
+      <div class="interact-zone">
+        <label>Start value (runs until &gt; 5):</label>
+        <input type="number" id="l3-start" placeholder="e.g. 1" min="1" max="10" value="1"/>
+        <button class="run-btn" onclick="runL3()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="l3-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">04</div><div class="example-title">for-each Loop</div></div>
+      <div class="example-desc">Type items separated by commas and it will print each one on its own line.</div>
+      <div class="interact-zone">
+        <label>Enter items separated by commas:</label>
+        <input type="text" id="l4-items" placeholder="Apple, Banana, Mango" value="Apple, Banana, Mango"/>
+        <button class="run-btn" onclick="runL4()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="l4-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">05</div><div class="example-title">Nested Loop</div></div>
+      <div class="example-desc">Enter a table size and it will generate a multiplication table of that size.</div>
+      <div class="interact-zone">
+        <label>Table size (max 9):</label>
+        <input type="number" id="l5-size" placeholder="e.g. 3" min="1" max="9" value="3"/>
+        <button class="run-btn" onclick="runL5()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="l5-out">...</div></div>
+      </div>
+    </div>
+  </div>
+  <footer>THANK YOU</footer>
+</main>
+<script>
+  function runL1(){const m=parseInt(document.getElementById('l1-max').value);if(isNaN(m)||m<1){document.getElementById('l1-out').textContent='⚠ Enter a number between 1 and 20.';return;}let o='';for(let i=1;i<=Math.min(m,20);i++)o+='Count: '+i+'\n';document.getElementById('l1-out').textContent=o.trim();}
+  function runL2(){const s=parseInt(document.getElementById('l2-start').value);if(isNaN(s)){document.getElementById('l2-out').textContent='⚠ Enter a valid number.';return;}let o='',n=s;while(n<=10&&(n-s)<15){o+='Number: '+n+'\n';n++;}document.getElementById('l2-out').textContent=o.trim()||'(No output — already > 10)';}
+  function runL3(){const s=parseInt(document.getElementById('l3-start').value);if(isNaN(s)){document.getElementById('l3-out').textContent='⚠ Enter a valid number.';return;}let o='',x=s,r=0;do{o+='x = '+x+'\n';x++;r++;}while(x<=5&&r<20);document.getElementById('l3-out').textContent=o.trim();}
+  function runL4(){const items=document.getElementById('l4-items').value.split(',').map(s=>s.trim()).filter(s=>s.length>0);if(!items.length){document.getElementById('l4-out').textContent='⚠ Please enter at least one item.';return;}document.getElementById('l4-out').textContent=items.map(i=>'Item: '+i).join('\n');}
+  function runL5(){const n=Math.min(parseInt(document.getElementById('l5-size').value)||0,9);if(n<1){document.getElementById('l5-out').textContent='⚠ Enter a number between 1 and 9.';return;}let o='';for(let i=1;i<=n;i++){let r='';for(let j=1;j<=n;j++)r+=(i+'x'+j+'='+(i*j)).padEnd(8);o+=r.trim()+'\n';}document.getElementById('l5-out').textContent=o.trim();}
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HCIProgramming — Basic I/O</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#0a0a0f;--surface:#13131a;--card:#1a1a24;--border:#2a2a3d;--accent:#7c6af7;--accent2:#f76a8c;--accent3:#6af7c8;--text:#e8e8f0;--muted:#6b6b88;--code-bg:#0d0d14;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;}
+    .nav-logo{font-size:1.1rem;font-weight:800;letter-spacing:-0.5px;color:var(--accent);text-decoration:none;}
+    .nav-logo span{color:var(--accent2);}
+    .nav-links{display:flex;gap:4px;}
+    .nav-links a{color:var(--muted);font-family:'Space Mono',monospace;font-size:0.75rem;padding:6px 14px;border-radius:6px;transition:all .2s;text-decoration:none;display:inline-block;}
+    .nav-links a:hover{color:var(--text);background:var(--surface);}
+    .nav-links a.active{color:var(--accent);background:rgba(124,106,247,0.15);}
+    main{padding-top:80px;min-height:100vh;animation:fadeIn .3s ease;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .topic-header{padding:3rem 2rem 2rem;max-width:860px;margin:0 auto;border-bottom:1px solid var(--border);}
+    .topic-header h2{font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-1px;}
+    .topic-header p{color:var(--muted);margin-top:.5rem;font-size:0.95rem;}
+    .examples-list{max-width:860px;margin:0 auto;padding:2rem;display:flex;flex-direction:column;gap:1.5rem;}
+    .example-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+    .example-header{padding:1rem 1.25rem 0.75rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+    .example-num{font-family:'Space Mono',monospace;font-size:0.65rem;padding:2px 8px;border-radius:10px;color:var(--accent);border:1px solid rgba(124,106,247,0.3);background:rgba(124,106,247,0.1);}
+    .example-title{font-size:0.95rem;font-weight:700;}
+    .example-desc{padding:.75rem 1.25rem;color:var(--muted);font-size:0.85rem;line-height:1.6;}
+    .interact-zone{margin:0 1.25rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+    .interact-zone label{font-size:0.8rem;color:var(--muted);display:block;margin-bottom:.4rem;font-family:'Space Mono',monospace;}
+    .interact-zone input{width:100%;background:var(--code-bg);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:0.82rem;padding:8px 10px;border-radius:8px;margin-bottom:.75rem;outline:none;transition:border-color .2s;}
+    .interact-zone input:focus{border-color:var(--accent);}
+    .run-btn{background:var(--accent);color:#fff;border:none;font-family:'Space Mono',monospace;font-size:0.75rem;padding:8px 18px;border-radius:8px;cursor:pointer;transition:opacity .2s;letter-spacing:1px;}
+    .run-btn:hover{opacity:0.85;}
+    .output-box{margin-top:.75rem;background:var(--code-bg);border:1px solid rgba(106,247,200,0.2);border-radius:8px;padding:.75rem 1rem;}
+    .out-label{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--accent3);letter-spacing:1px;margin-bottom:.3rem;}
+    .out-text{font-family:'Space Mono',monospace;font-size:0.82rem;color:#b5f5e3;white-space:pre-wrap;min-height:1.4em;}
+    footer{text-align:center;padding:2rem;font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);border-top:1px solid var(--border);}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="241697CAMATAIndex.html">HCI<span>Programming</span></a>
+  <div class="nav-links">
+    <a href="241697CAMATAIndex.html">Home</a>
+    <a href="241697CAMATABasicIO.html" class="active">Basic I/O</a>
+    <a href="241697CAMATAVariables.html">Variables</a>
+    <a href="241697CAMATAConditionals.html">Conditionals</a>
+    <a href="241697CAMATALoops.html">Loops</a>
+  </div>
+</nav>
+<main>
+  <div class="topic-header">
+    <h2>Basic I/O</h2>
+    <p>Print output and read input from the user. Try each example — type something and click Run!</p>
+  </div>
+  <div class="examples-list">
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">01</div><div class="example-title">Hello, World!</div></div>
+      <div class="example-desc">Type any message and it will be printed to the screen as output.</div>
+      <div class="interact-zone">
+        <label>Type a message to print:</label>
+        <input type="text" id="io1-input" placeholder="e.g. Hello, World!" value="Hello, World!"/>
+        <button class="run-btn" onclick="runIO1()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="io1-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">02</div><div class="example-title">Lowercase to Uppercase</div></div>
+      <div class="example-desc">Type any lowercase text and it will be converted to all uppercase letters.</div>
+      <div class="interact-zone">
+        <label>Type your lowercase text:</label>
+        <input type="text" id="io2-input" placeholder="e.g. hello world" value="hello world"/>
+        <button class="run-btn" onclick="runIO2()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="io2-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">03</div><div class="example-title">Uppercase to Lowercase</div></div>
+      <div class="example-desc">Type any uppercase text and it will be converted to all lowercase letters.</div>
+      <div class="interact-zone">
+        <label>Type your UPPERCASE text:</label>
+        <input type="text" id="io3-input" placeholder="e.g. HELLO WORLD" value="HELLO WORLD"/>
+        <button class="run-btn" onclick="runIO3()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="io3-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">04</div><div class="example-title">Word Counter</div></div>
+      <div class="example-desc">Type a sentence and it will count how many words are in it.</div>
+      <div class="interact-zone">
+        <label>Type your sentence:</label>
+        <input type="text" id="io4-input" placeholder="e.g. Mark Niel is so handsome"/>
+        <button class="run-btn" onclick="runIO4()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="io4-out">...</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-header"><div class="example-num">05</div><div class="example-title">Add Two Numbers</div></div>
+      <div class="example-desc">Enter two numbers and it will add them together and display the sum.</div>
+      <div class="interact-zone">
+        <label>First number:</label>
+        <input type="number" id="io5-a" placeholder="e.g. 5"/>
+        <label>Second number:</label>
+        <input type="number" id="io5-b" placeholder="e.g. 3"/>
+        <button class="run-btn" onclick="runIO5()">▶ Run</button>
+        <div class="output-box"><div class="out-label">▶ OUTPUT</div><div class="out-text" id="io5-out">...</div></div>
+      </div>
+    </div>
+  </div>
+  <footer>THANK YOU</footer>
+</main>
+<script>
+  function runIO1(){const msg=document.getElementById('io1-input').value.trim()||'Hello, World!';document.getElementById('io1-out').textContent=msg;}
+  function runIO2(){const t=document.getElementById('io2-input').value;if(!t.trim()){document.getElementById('io2-out').textContent='⚠ Please type some text.';return;}document.getElementById('io2-out').textContent=t.toUpperCase();}
+  function runIO3(){const t=document.getElementById('io3-input').value.trim();if(!t){document.getElementById('io3-out').textContent='⚠ Please type some text.';return;}document.getElementById('io3-out').textContent=t.toLowerCase();}
+  function runIO4(){const t=document.getElementById('io4-input').value.trim();if(!t){document.getElementById('io4-out').textContent='⚠ Please type a sentence.';return;}const c=t.split(/\s+/).filter(w=>w.length>0).length;document.getElementById('io4-out').textContent='Your sentence: "'+t+'"\nWord count: '+c+(c===1?' word':' words');}
+  function runIO5(){const a=parseFloat(document.getElementById('io5-a').value);const b=parseFloat(document.getElementById('io5-b').value);if(isNaN(a)||isNaN(b)){document.getElementById('io5-out').textContent='⚠ Please enter both numbers.';return;}document.getElementById('io5-out').textContent='Enter first number: '+a+'\nEnter second number: '+b+'\nThe sum is: '+(a+b);}
+</script>
+</body>
+</html>
